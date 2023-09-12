@@ -42,28 +42,30 @@ export class PieChart {
   createChart() { 
     const data = this.chartData
     console.log(data)
-    let currentPoint = 0
+    let currentAngleInRadians = 0
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svg.setAttribute("width", "200")
     svg.setAttribute("height", "200")
     for (let index = 0; index < data.length; index++) {
-      const pieSlice = this.generateSlice(data[index], currentPoint)
-      currentPoint += data[index].percent * 200
-       console.log(currentPoint)
+      const pieSlice = this.generateSlice(data[index], currentAgnleInRadians)
+      currentAngleInRadians += (data[index].percent * 360) * Math.PI / 180
       svg.appendChild(pieSlice)
     }
     return svg
   }
 
-  generateSlice(data, currentPoint) {
-    const pieSlice = document.createElementNS("http://www.w3.org/2000/svg", "circle")
-    pieSlice.setAttribute("cx", `${currentPoint + 20}`)
-    pieSlice.setAttribute("cy", "100")
-    pieSlice.setAttribute("r", "20")
-    pieSlice.setAttribute("fill", `${data.color}`)
+  generateSlice(data, startAngleInRadians) {
+    const pieSlice = document.createElementNS("http://www.w3.org/2000/svg", "path")
+    const startX = 100 + Math.cos(startAngleInRadians) * 100
+    const startY = 100 + Math.sin(startAngleInRadians) * 100
+    const endX = 100 + Math.cos(startAngleInRadians + (data.percent * 360) * Math.PI / 180) * 100
+
+
 
     return pieSlice
   }
+
+  
 
 
 }
