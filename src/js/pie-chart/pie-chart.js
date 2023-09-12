@@ -44,18 +44,24 @@ export class PieChart {
     console.log(data)
     let currentPoint = 0
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    svg.setAttribute("width", "200")
+    svg.setAttribute("height", "200")
     for (let index = 0; index < data.length; index++) {
-      const pieSlice = this.generateSlice(data[index])
+      const pieSlice = this.generateSlice(data[index], currentPoint)
       currentPoint += data[index].percent * 200
+       console.log(currentPoint)
       svg.appendChild(pieSlice)
     }
     return svg
   }
 
   generateSlice(data, currentPoint) {
-    const pieSlice = document.createElementNS("http://www.w3.org/2000/svg", "path")
-    pieSlice.setAttribute("d", `M100,100 L${currentPoint},100 A100,100 0 0,1 100,200 Z`)
-    pieSlice.setAttribute("fill", data.color)
+    const pieSlice = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+    pieSlice.setAttribute("cx", `${currentPoint + 20}`)
+    pieSlice.setAttribute("cy", "100")
+    pieSlice.setAttribute("r", "20")
+    pieSlice.setAttribute("fill", `${data.color}`)
+
     return pieSlice
   }
 
