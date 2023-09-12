@@ -1,0 +1,21 @@
+{
+  "name": "1dv610-l2",
+  "version": "1.0.0",
+  "description": "Assignment 2 for course 1dv610",
+  "main": "src/js/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "dev": "node src/js/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/no222hj/1dv610-L2.git"
+  },
+  "author": "Nathanael Olsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/no222hj/1dv610-L2/issues"
+  },
+  "homepage": "https://github.com/no222hj/1dv610-L2#readme"
+}
