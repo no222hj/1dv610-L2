@@ -6,6 +6,7 @@
  */
 
 import { PieChart } from '../pie-chart/pie-chart.js'
+import { BarChart } from '../bar-chart/bar-chart.js'
 
 /**
  * Creates a chart module
@@ -43,10 +44,18 @@ getTotalAmount() {
   return this.#totalAmount;
 }
 
+getData() {
+
+}
+
 plotPieChart() {
   this.setPercentage()
-  this.pieChart = new PieChart(this.chartData)
-  console.log(this.chartData)
-  return this.pieChart.createChart()
+  const pieChart = new PieChart(this.chartData)
+  return pieChart.createChart()
+}
+
+plotBarChart() {
+  const barChart = new BarChart(this.chartData)
+  return barChart.createChart()
 }
 }
