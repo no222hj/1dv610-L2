@@ -11,30 +11,36 @@
 
 export class BarChart {
 
+    chartData
 
-    constructor(data) {
+    chartOptions
+
+    constructor(data, options) {
       this.chartData = data
+      this.chartOptions = options
     }
 
     createChart() { 
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      const group = document.createElementNS("http://www.w3.org/2000/svg", "g")
+      const chartGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
       svg.setAttribute("width", "200")
       svg.setAttribute("height", "200")
 
-      group.appendChild(this.generateAxisX(200, 200))
-      group.appendChild(this.generateAxisY(200, 200))
-      group.appendChild(this.generateBar(this.chartData[0], 200, 200))
+      chartGroup.appendChild(this.generateAxisX(200, 200))
+      chartGroup.appendChild(this.generateAxisY(200, 200))
+      chartGroup.appendChild(this.generateBar(this.chartData[0], 200, 200))
 
-      svg.appendChild(group)
+      svg.appendChild(chartGroup)
 
+      this.getMaxValueX()
+      console.log(this.getMaxValueX())
       return svg
     }
 
     generateAxisX(height, width) {
     
       const axis = document.createElementNS("http://www.w3.org/2000/svg", "line")
-      axis.setAttribute("x1", 1)
+      axis.setAttribute("x1", 0)
       axis.setAttribute("y1", height)
       axis.setAttribute("x2", width)
       axis.setAttribute("y2", height)
@@ -53,15 +59,39 @@ export class BarChart {
 
       return axis
     }
+
+    // function for deciding x axis top value, if no argument is given, the function will use the highest value in the chart data
+    //Redo this later with options
+    getMaxValueX(maxValue) {
+      if (maxValue) {
+        return maxValue
+      } else {
+        let max = 0
+        this.chartData.forEach(element => {
+          if (element.amount > max) {
+            max = element.amount
+          }
+        })
+        return max
+      }
+    }
+        
+
+
   
     generateBar(data, height, width) {
 
       const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect")
+      console.log(height)
+      const barHeight = data.amount / this.getMaxValueX() * height
+      console.log(barHeight)
+      const barWidth = width / this.chartData.length
+      console.log(barWidth)
       bar.setAttribute("x", "0")
-      bar.setAttribute("y", "150")
-      bar.setAttribute("width", "20")
-      bar.setAttribute("height", "50")
-      bar.setAttribute("fill", "red")
+      bar.setAttribute("y", `${barHeight}`)
+      bar.setAttribute("width", `${barWidth}`)
+      bar.setAttribute("height", `${barHeight}`)
+      bar.setAttribute("fill", `${data.color}`)
 
 
       return bar
