@@ -13,10 +13,15 @@ import { BarChart } from '../bar-chart/bar-chart.js'
  */
 export class ChartModule {
 
+chartData
+
+chartOptions
+
 #totalAmount;
 
-constructor (chartData) {
+constructor (chartData, options) {
   this.chartData = chartData
+  this.chartOptions = this.setOptions(options)
   this.#totalAmount = this.setTotalAmount()
 }
 
@@ -48,14 +53,37 @@ getData() {
 
 }
 
+// Create a svg element after given parameters, or default values, and return it.
+createSVG() {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+  svg.setAttribute("width", `${this.chartOptions.size.width}`)
+  svg.setAttribute("height", `${this.chartOptions.size.height}`)
+  return svg
+}
+
+setOptions(userOptions) {
+  const defaultOptions = {
+    size: {
+      width: 400,
+      height: 400
+    }
+  }
+
+  return Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions)))
+}
+
 plotPieChart() {
   this.setPercentage()
-  const pieChart = new PieChart(this.chartData)
-  return pieChart.createChart()
+  const svg = this.createSVG()
+  const pieChart = new PieChart(this.chartData, this.chartOptions)
+  svg.appendChild(pieChart.createPieChart())
+  return svg
 }
 
 plotBarChart() {
-  const barChart = new BarChart(this.chartData)
-  return barChart.createChart()
+  const svg = this.createSVG()
+  const barChart = new BarChart(this.chartData, this.chartOptions)
+  svg.appendChild(barChart.createBarChart())
+  return svg
 }
 }
