@@ -14,9 +14,9 @@ const chartData = [
   {desc: '2', amount: 1, color: 'green'},
   {desc: '3', amount: 1, color: 'blue'},
 ]
+
 const chartModule = new ChartModule(chartData)
 const pieChart = chartModule.plotPieChart()
+const barChart = chartModule.plotBarChart()
 document.getElementById('pieChart').appendChild(pieChart)
-
-
-console.log(chartModule.getTotalAmount(chartData))
+document.getElementById('barChart').appendChild(chartModule.plotBarChart())
