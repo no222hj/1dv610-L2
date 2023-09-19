@@ -7,6 +7,7 @@
 
 import { PieChart } from '../pie-chart/pie-chart.js'
 import { BarChart } from '../bar-chart/bar-chart.js'
+import { LineChart } from '../line-chart/line-chart.js'
 
 /**
  * Creates a chart module
@@ -84,6 +85,13 @@ plotBarChart() {
   const svg = this.createSVG()
   const barChart = new BarChart(this.chartData, this.chartOptions)
   svg.appendChild(barChart.createBarChart())
+  return svg
+}
+
+plotLineChart() {
+  const svg = this.createSVG()
+  const lineChart = new LineChart(this.chartData, this.chartOptions)
+  svg.appendChild(lineChart.createLineChart())
   return svg
 }
 }

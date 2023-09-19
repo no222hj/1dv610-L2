@@ -16,7 +16,8 @@ export class PieChart {
     this.chartData = data
   }
 
-  createChart() { 
+
+  createPieChart() { 
     const data = this.chartData
     console.log(data)
     let currentAngleInRadians = 0
