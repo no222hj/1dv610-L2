@@ -12,8 +12,11 @@
 export class PieChart {
 
 
-  constructor(data) {
+  constructor(data, options) {
     this.chartData = data
+    this.chartOptions = options //use setter in future.
+    this.chartWidth = this.chartOptions.size.width
+    this.radian = this.chartWidth / 2 * 0.75
   }
 
 
@@ -21,26 +24,31 @@ export class PieChart {
     const data = this.chartData
     console.log(data)
     let currentAngleInRadians = 0
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-    svg.setAttribute("width", "200")
-    svg.setAttribute("height", "200")
+    const pieGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
     for (let index = 0; index < data.length; index++) {
       const pieSlice = this.generateSlice(data[index], currentAngleInRadians)
       currentAngleInRadians += this.convertToRadians(data[index].percent * 360)
-      svg.appendChild(pieSlice)
+      pieGroup.appendChild(pieSlice)
     }
-    return svg
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "path")
+    // I want a outline circle, not a filled one to outline the chart slices.
+    circle.setAttribute("d", `M${this.chartWidth / 2}, ${this.chartWidth / 2} m${-this.radian}, 0 a${this.radian},${this.radian} 0 1,0 ${(this.chartWidth / 2) * 1.5},0 a${this.radian},${this.radian} 0 1,0 ${-(this.chartWidth / 2) * 1.5},0`)
+    circle.setAttribute("fill", "none")
+    circle.setAttribute("stroke", "black")
+    pieGroup.appendChild(circle)
+    return pieGroup
   }
+
 
   generateSlice(data, startAngleInRadians) {
     const pieSlice = document.createElementNS("http://www.w3.org/2000/svg", "path")
-    const startX = 100 + Math.cos(startAngleInRadians) * 75
-    const startY = 100 + Math.sin(startAngleInRadians) * 75
-    const endX = 100 + Math.cos(startAngleInRadians + this.convertToRadians(data.percent * 360)) * 75
-    const endY = 100 + Math.sin(startAngleInRadians + this.convertToRadians(data.percent * 360)) * 75
+    const startX = this.chartWidth / 2 + Math.cos(startAngleInRadians) * this.radian
+    const startY = this.chartWidth / 2 + Math.sin(startAngleInRadians) * this.radian
+    const endX = this.chartWidth / 2 + Math.cos(startAngleInRadians + this.convertToRadians(data.percent * 360)) * this.radian
+    const endY = this.chartWidth / 2 + Math.sin(startAngleInRadians + this.convertToRadians(data.percent * 360)) * this.radian
 
 
-    pieSlice.setAttribute("d", `M100,100 L${startX},${startY} A75,75 0 0,1 ${endX},${endY} Z`)
+    pieSlice.setAttribute("d", `M${this.chartWidth / 2},${this.chartWidth / 2} L${startX},${startY} A${this.radian},${this.radian}, 0 0,1 ${endX},${endY} Z`)
     pieSlice.setAttribute("fill", data.color)
 
     return pieSlice
