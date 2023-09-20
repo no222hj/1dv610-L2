@@ -9,7 +9,7 @@ import { ChartModule } from './chart-module/chart-module.js'
 ]
 */
 
-const chartDataSingleValue = [
+const chartDataValue = [
   {desc: '1', amount: 2, color: 'red'},
   {desc: '2', amount: 2, color: 'green'},
   {desc: '3', amount: 1, color: 'blue'},
@@ -30,11 +30,10 @@ const chartOptions = {
   type: 'bar'
 }
 
-const chartModuleSingleValue = new ChartModule(chartDataSingleValue, chartOptions)
-const chartModuleDoubleValue = new ChartModule(chartDataDoubleValue, chartOptions)
-const pieChart = chartModuleSingleValue.plotPieChart()
-const barChart = chartModuleSingleValue.plotBarChart()
-const lineChart = chartModuleDoubleValue.plotLineChart()
+const chartModuleValue = new ChartModule(chartDataValue, chartOptions)
+const pieChart = chartModuleValue.plotPieChart()
+const barChart = chartModuleValue.plotBarChart()
+const lineChart = chartModuleValue.plotLineChart()
 document.getElementById('pieChart').appendChild(pieChart)
 document.getElementById('barChart').appendChild(barChart)
 document.getElementById('lineChart').appendChild(lineChart)

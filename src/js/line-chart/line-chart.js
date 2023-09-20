@@ -30,34 +30,40 @@ export class LineChart {
       chartGroup.appendChild(lineField)
 
       this.lineTotalWidth = this.chartOptions.size.width - this.lineChartOptions.marginLeft - this.lineChartOptions.marginRight
+      this.lineTotalHeight = this.chartOptions.size.height - this.lineChartOptions.marginTop - this.lineChartOptions.marginBottom
 
       chartGroup.appendChild(this.generateAxisX())
       chartGroup.appendChild(this.generateAxisY())
 
       const line = document.createElementNS("http://www.w3.org/2000/svg", "path")
-      let currentX = this.lineChartOptions.marginLeft
-      let currentY = 0
+
+      const xGap = this.lineTotalWidth / this.chartData.length
+      let currentX = this.lineTotalWidth
+      let currentY = this.lineTotalHeight
       let path = ""
       this.chartData.forEach((element, i) => {
-        currentX = element.amountX + this.lineChartOptions.marginLeft
-        currentY = element.amountY
+        currentX = xGap * i + this.lineChartOptions.marginLeft
+        currentY = this.lineTotalHeight + this.lineChartOptions.marginTop - (element.amount / this.lineChartOptions.maxValueY * this.lineTotalHeight)
+        console.log(this.lineChartOptions.maxValueY)
         if (i === 0) {
-            path = `M${currentX},${currentY}`
+            path = `M${currentX} ${currentY}`
         } else {
-            path += ` L${currentX},${currentY}`
+            path += ` L${currentX} ${currentY}`
         }
         line.setAttribute("d", path)
+        console.log(path)
         line.setAttribute("stroke", "black")
 
       })
-
+      chartGroup.appendChild(line)
       this.getMaxValueX()
       return chartGroup
     }
 
     setLineChartOptions(userOptions) {
       const defaultOptions = {
-        maxValue: this.getMaxValueX(),
+        maxValueX: this.getMaxValueX(),
+        maxValueY: this.getMaxValueY(),
         ticks: 5,
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
@@ -81,14 +87,11 @@ export class LineChart {
       axisLine.setAttribute("stroke", "black")
 
       const tickSpace = (this.chartOptions.size.width - (this.lineChartOptions.marginLeft + this.lineChartOptions.marginRight)) / this.lineChartOptions.ticks
-      console.log(this.lineChartOptions.marginLeft)
       for (let i = 0; i < this.lineChartOptions.ticks; i++) {
         const tick = document.createElementNS("http://www.w3.org/2000/svg", "line")
         tick.setAttribute("x1", i * tickSpace + margin + (tickSpace - margin))
-        console.log(i * tickSpace + margin)
         tick.setAttribute("y1", this.chartOptions.size.height)
         tick.setAttribute("x2", i * tickSpace + margin + (tickSpace - margin))
-        console.log(i * tickSpace + margin)
         tick.setAttribute("y2", this.chartOptions.size.height - this.lineChartOptions.marginBottom)
         tick.setAttribute("stroke", "black")
         axis.appendChild(tick)
@@ -122,10 +125,17 @@ export class LineChart {
 
     // function for deciding x axis top value, if no argument is given, the function will use the highest value in the chart data
     //Redo this later with options
-    getMaxValueX(maxValue) {
-      if (maxValue) {
-        return maxValue
-      } else {
+    getMaxValueX() {
+        let max = 0
+        this.chartData.forEach(element => {
+          if (element.amountX > max) {
+            max = element.amountX
+          }
+        })
+        return max
+    }
+
+    getMaxValueY() {
         let max = 0
         this.chartData.forEach(element => {
           if (element.amount > max) {
@@ -133,7 +143,5 @@ export class LineChart {
           }
         })
         return max
-      }
     }
-    
-  }
+}

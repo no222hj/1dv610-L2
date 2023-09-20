@@ -49,6 +49,8 @@ export class BarChart {
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
         marginRight: 0.02 * this.chartOptions.size.width,
+        marginTop: 0.02 * this.chartOptions.size.height,
+        marginBottom: 0.02 * this.chartOptions.size.height
         }
 
         return Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions || {})))
