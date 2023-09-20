@@ -16,18 +16,29 @@ const chartDataValue = [
   {desc: '4', amount: 4, color: 'black'},
   {desc: '5', amount: 5, color: 'pink'},
   {desc: '6', amount: 6, color: 'yellow'},
+  {desc: '7', amount: 7, color: 'orange'},
+  {desc: '8', amount: 8, color: 'purple'},
+  {desc: '9', amount: 9, color: 'brown'},
+  {desc: '10', amount: 16, color: 'grey'},
+  {desc: '11', amount: 11, color: 'white'},
+  {desc: '12', amount: 14, color: 'cyan'},
+  {desc: '13', amount: 13, color: 'magenta'},
+  {desc: '14', amount: 12, color: 'lime'},
+  {desc: '15', amount: 15, color: 'olive'},
+  {desc: '16', amount: 16, color: 'maroon'},
+  {desc: '17', amount: 17, color: 'navy'},
+  
+  //give me more randomized data, the "amount" has to be random numbers between 0 and 150
 ]
 
-const chartDataDoubleValue = [
-  {desc: '1', amountX: 2, amountY: 1, color: 'red'},
-  {desc: '2', amountX: 2, amountY: 2, color: 'green'},
-  {desc: '3', amountX: 1, amountY: 3, color: 'blue'},
-  {desc: '4', amountX: 4, amountY: 4, color: 'black'},
-  {desc: '5', amountX: 5, amountY: 5, color: 'pink'},
-]
+
 
 const chartOptions = {
-  type: 'bar'
+  type: 'bar',
+  size: {
+    width: 500,
+    height: 500
+  },
 }
 
 const chartModuleValue = new ChartModule(chartDataValue, chartOptions)
