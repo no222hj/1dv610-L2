@@ -8,6 +8,7 @@
 import { PieChart } from '../pie-chart/pie-chart.js'
 import { BarChart } from '../bar-chart/bar-chart.js'
 import { LineChart } from '../line-chart/line-chart.js'
+import { DoughnutChart } from '../doughnut-chart/doughnut-chart.js'
 
 /**
  * Creates a chart module
@@ -92,6 +93,13 @@ plotLineChart() {
   const svg = this.createSVG()
   const lineChart = new LineChart(this.chartData, this.chartOptions)
   svg.appendChild(lineChart.createLineChart())
+  return svg
+}
+
+plotDoughnutChart() {
+  const svg = this.createSVG()
+  const doughnutChart = new DoughnutChart(this.chartData, this.chartOptions)
+  svg.appendChild(doughnutChart.createDoughnutChart())
   return svg
 }
 }
