@@ -52,19 +52,18 @@ export class LineChart {
             path += ` L${currentX} ${currentY}`
         }
         line.setAttribute("d", path)
-        console.log(path)
         line.setAttribute("stroke", "black")
 
       })
       chartGroup.appendChild(line)
-      this.getMaxValueX()
+      this.getMaxValue()
       return chartGroup
     }
 
     setLineChartOptions(userOptions) {
       const defaultOptions = {
-        maxValueX: this.getMaxValueX(),
-        maxValueY: this.getMaxValueY(),
+        maxValueX: this.getMaxValue(),
+        maxValueY: this.getMaxValue(),
         ticks: 5,
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
@@ -124,19 +123,7 @@ export class LineChart {
       return axis
     }
 
-    // function for deciding x axis top value, if no argument is given, the function will use the highest value in the chart data
-    //Redo this later with options
-    getMaxValueX() {
-        let max = 0
-        this.chartData.forEach(element => {
-          if (element.amountX > max) {
-            max = element.amountX
-          }
-        })
-        return max
-    }
-
-    getMaxValueY() {
+    getMaxValue() {
         let max = 0
         this.chartData.forEach(element => {
           if (element.amount > max) {
