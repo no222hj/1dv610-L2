@@ -23,7 +23,7 @@ export class PieChart {
   createPieChart() { 
     const data = this.chartData
     console.log(data)
-    let currentAngleInRadians = 0
+    let currentAngleInRadians = 360
     const pieGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
     for (let index = 0; index < data.length; index++) {
       const pieSlice = this.generateSlice(data[index], currentAngleInRadians)

@@ -23,7 +23,7 @@ export class DoughnutChart {
   
     createDoughnutChart() { 
       const data = this.chartData
-      let currentAngleInRadians = 0
+      let currentAngleInRadians = 360
       const doughnutGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
       for (let index = 0; index < data.length; index++) {
         const doughnutPart = this.generatePart(data[index], currentAngleInRadians)
