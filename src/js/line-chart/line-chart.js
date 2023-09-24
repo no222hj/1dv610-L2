@@ -20,8 +20,14 @@ export class LineChart {
     constructor(data, options) {
       this.chartData = data
       this.chartOptions = options
-      this.lineChartOptions = this.setLineChartOptions(options.type)
+      this.lineChartOptions = this.#setLineChartOptions(options.type)
     }
+
+    /**
+     * Creates a bar chart svg
+     * 
+     * @returns {object} an svg element <g> with a bar chart.
+     */
 
     createLineChart() { 
 
@@ -32,8 +38,8 @@ export class LineChart {
       this.lineTotalWidth = this.chartOptions.size.width - this.lineChartOptions.marginLeft - this.lineChartOptions.marginRight
       this.lineTotalHeight = this.chartOptions.size.height - this.lineChartOptions.marginTop - this.lineChartOptions.marginBottom
 
-      chartGroup.appendChild(this.generateAxisX())
-      chartGroup.appendChild(this.generateAxisY())
+      chartGroup.appendChild(this.#generateAxisX())
+      chartGroup.appendChild(this.#generateAxisY())
 
       const line = document.createElementNS("http://www.w3.org/2000/svg", "path")
       line.setAttribute("fill", "none")
@@ -55,14 +61,21 @@ export class LineChart {
 
       })
       chartGroup.appendChild(line)
-      this.getMaxValue()
+      this.#getMaxValue()
       return chartGroup
     }
 
-    setLineChartOptions(userOptions) {
+    /**
+     * Sets the default options for the bar chart.
+     * 
+     * @param {object} userOptions 
+     * @returns {object} an object with the default options where the user options are omitted.
+     */
+
+    #setLineChartOptions(userOptions) {
       const defaultOptions = {
-        maxValueX: this.getMaxValue(),
-        maxValueY: this.getMaxValue(),
+        maxValueX: this.#getMaxValue(),
+        maxValueY: this.#getMaxValue(),
         ticks: 5,
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
@@ -74,7 +87,12 @@ export class LineChart {
         return Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions || {})))
       }
     
-    generateAxisX() {
+    /**
+     * Generates a x-axis for the bar chart.
+     * 
+     * @returns {object} svg element representing the axis.
+     */
+    #generateAxisX() {
     const margin = this.lineChartOptions.marginLeft
       const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
       const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
@@ -98,7 +116,12 @@ export class LineChart {
       return axis
     }
 
-    generateAxisY() {
+    /**
+     * Generates a y-axis for the bar chart.
+     * 
+     * @returns {object} svg element representing the axis.
+     */
+    #generateAxisY() {
       const margin = this.lineChartOptions.marginLeft
       const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
       const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
@@ -122,7 +145,13 @@ export class LineChart {
       return axis
     }
 
-    getMaxValue() {
+    /**
+     * Gets the maximum value of the data.
+     * 
+     * @returns {number} the maximum value of the data.
+     * 
+     */
+    #getMaxValue() {
         let max = 0
         this.chartData.forEach(element => {
           if (element.amount > max) {

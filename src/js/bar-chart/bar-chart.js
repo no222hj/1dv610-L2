@@ -34,8 +34,8 @@ export class BarChart {
 
       this.barWidth = (this.barsTotalWidth - this.barChartOptions.marginLeft) / this.chartData.length - this.barChartOptions.barSpace
 
-      chartGroup.appendChild(this.generateAxisX())
-      chartGroup.appendChild(this.generateAxisY())
+      chartGroup.appendChild(this.#generateAxisX())
+      chartGroup.appendChild(this.#generateAxisY())
       this.chartData.forEach((element, i) => {
         const bar = this.generateBar(element, i)
         const title = document.createElementNS("http://www.w3.org/2000/svg", "title")
@@ -44,13 +44,13 @@ export class BarChart {
         bars.appendChild(bar)
       });
 
-      this.getMaxValue()
+      this.#getMaxValue()
       return chartGroup
     }
 
     setBarChartOptions(userOptions) {
       const defaultOptions = {
-        maxValue: this.getMaxValue(),
+        maxValue: this.#getMaxValue(),
         ticks: 5,
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
@@ -62,7 +62,7 @@ export class BarChart {
         return Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions || {})))
       }
     
-      generateAxisX() {
+      #generateAxisX() {
         const margin = this.barChartOptions.marginLeft
           const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
           const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
@@ -86,7 +86,7 @@ export class BarChart {
           return axis
         }
     
-        generateAxisY() {
+        #generateAxisY() {
           const margin = this.barChartOptions.marginLeft
           const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
           const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
@@ -112,7 +112,7 @@ export class BarChart {
 
     // function for deciding x axis top value, if no argument is given, the function will use the highest value in the chart data
     //Redo this later with options
-    getMaxValue() {
+    #getMaxValue() {
       let max = 0
       this.chartData.forEach(element => {
         if (element.amount > max) {
@@ -128,7 +128,7 @@ export class BarChart {
     generateBar(data, indexOfBar) {
 
       const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect")
-      const barHeight = data.amount / this.getMaxValue() * this.barsTotalHeight
+      const barHeight = data.amount / this.#getMaxValue() * this.barsTotalHeight
 
       bar.setAttribute("y", `${this.chartOptions.size.height - barHeight - this.barChartOptions.marginBottom}`)
       bar.setAttribute("x", `${this.barChartOptions.barSpace + (this.barWidth + this.barChartOptions.barSpace) * indexOfBar + this.barChartOptions.marginLeft}`)
