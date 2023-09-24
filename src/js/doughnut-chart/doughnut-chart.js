@@ -50,8 +50,6 @@ export class DoughnutChart {
       const startOuterY = this.chartWidth / 2 + Math.sin(startAngleInRadians) * this.radian
       const endOuterX = this.chartWidth / 2 + Math.cos(startAngleInRadians + this.convertToRadians(data.percent * 360)) * this.radian
       const endOuterY = this.chartWidth / 2 + Math.sin(startAngleInRadians + this.convertToRadians(data.percent * 360)) * this.radian
-  
-      console.log(startOuterX)
 
       const startInnerX = this.chartWidth / 2 + Math.cos(startAngleInRadians) * this.radian * this.innerRadius
       const startInnerY = this.chartWidth / 2 + Math.sin(startAngleInRadians) * this.radian * this.innerRadius
@@ -66,7 +64,7 @@ export class DoughnutChart {
 
       doughnutPart.setAttribute("d", `${d}`)
       doughnutPart.setAttribute("fill", data.color)
-        doughnutPart.setAttribute("stroke", "white")
+      doughnutPart.setAttribute("stroke", "white")
   
       return doughnutPart
     }

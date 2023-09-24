@@ -32,8 +32,7 @@ export class BarChart {
       this.barsTotalWidth = this.chartOptions.size.width - this.barChartOptions.marginLeft - this.barChartOptions.marginRight
       this.barsTotalHeight = this.chartOptions.size.height - this.barChartOptions.marginTop - this.barChartOptions.marginBottom
 
-      this.barsTotalWidth = this.chartOptions.size.width - this.barChartOptions.marginLeft - this.barChartOptions.marginRight
-      this.barsTotalHeight = this.chartOptions.size.height - this.barChartOptions.marginTop - this.barChartOptions.marginBottom
+      this.barWidth = (this.barsTotalWidth - this.barChartOptions.marginLeft) / this.chartData.length - this.barChartOptions.barSpace
 
       chartGroup.appendChild(this.generateAxisX())
       chartGroup.appendChild(this.generateAxisY())
@@ -51,8 +50,7 @@ export class BarChart {
 
     setBarChartOptions(userOptions) {
       const defaultOptions = {
-        maxValueX: this.getMaxValue(),
-        maxValueY: this.getMaxValue(),
+        maxValue: this.getMaxValue(),
         ticks: 5,
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
@@ -75,12 +73,12 @@ export class BarChart {
           axisLine.setAttribute("y2", this.chartOptions.size.height - this.barChartOptions.marginBottom)
           axisLine.setAttribute("stroke", "black")
     
-          const tickSpace = (this.chartOptions.size.width - (this.barChartOptions.marginLeft + this.barChartOptions.marginRight)) / this.barChartOptions.ticks
-          for (let i = 0; i < this.barChartOptions.ticks; i++) {
+          const tickSpace = this.barWidth + this.barChartOptions.barSpace
+          for (let i = 0; i < this.chartData.length; i++) {
             const tick = document.createElementNS("http://www.w3.org/2000/svg", "line")
-            tick.setAttribute("x1", i * tickSpace + margin + (tickSpace - margin))
+            tick.setAttribute("x1", i * tickSpace + margin + tickSpace / 2 + this.barChartOptions.barSpace)
             tick.setAttribute("y1", this.chartOptions.size.height)
-            tick.setAttribute("x2", i * tickSpace + margin + (tickSpace - margin))
+            tick.setAttribute("x2", i * tickSpace + margin + tickSpace / 2 + this.barChartOptions.barSpace)
             tick.setAttribute("y2", this.chartOptions.size.height - this.barChartOptions.marginBottom)
             tick.setAttribute("stroke", "black")
             axis.appendChild(tick)
@@ -130,16 +128,15 @@ export class BarChart {
     generateBar(data, indexOfBar) {
 
       const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect")
-      // I want the bars to start with a margin from the left side of the chart, and a margin from the bottom of the chart.
       const barHeight = data.amount / this.getMaxValue() * this.barsTotalHeight
-      const barWidth = (this.barsTotalWidth - this.barChartOptions.marginLeft) / this.chartData.length - this.barChartOptions.barSpace
+
       bar.setAttribute("y", `${this.chartOptions.size.height - barHeight - this.barChartOptions.marginBottom}`)
-      bar.setAttribute("x", `${this.barChartOptions.barSpace + (barWidth + this.barChartOptions.barSpace) * indexOfBar + this.barChartOptions.marginLeft}`)
-      bar.setAttribute("width", `${barWidth}`)
+      bar.setAttribute("x", `${this.barChartOptions.barSpace + (this.barWidth + this.barChartOptions.barSpace) * indexOfBar + this.barChartOptions.marginLeft}`)
+      bar.setAttribute("width", `${this.barWidth}`)
       bar.setAttribute("height", `${barHeight}`)
       bar.setAttribute("fill", `${data.color}`)
       bar.setAttribute("stroke", "black")
-
+      console.log(barHeight)
       return bar
     }
   }

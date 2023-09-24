@@ -45,7 +45,6 @@ export class LineChart {
       this.chartData.forEach((element, i) => {
         currentX = xGap * i + this.lineChartOptions.marginLeft
         currentY = this.lineTotalHeight + this.lineChartOptions.marginTop - (element.amount / this.lineChartOptions.maxValueY * this.lineTotalHeight)
-        console.log(this.lineChartOptions.maxValueY)
         if (i === 0) {
             path = `M${currentX} ${currentY}`
         } else {
