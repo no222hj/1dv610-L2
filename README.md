@@ -7,4 +7,4 @@ SimpleCharts generates a set of methods for creating pie-, bar-, doughnut- and l
 
 # Get started! 
 
-To get started import SimpleCharts and 
+To get started import SimpleCharts to your project and create a instance of SimpleCharts: 
