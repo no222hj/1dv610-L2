@@ -39,7 +39,7 @@ export class BarChart {
       this.chartData.forEach((element, i) => {
         const bar = this.generateBar(element, i)
         const title = document.createElementNS("http://www.w3.org/2000/svg", "title")
-        title.textContent = `${element.desc}: ${element.amount}`
+        title.textContent = `${element.argument}: ${element.value}`
         bar.appendChild(title)
         bars.appendChild(bar)
       });
@@ -115,20 +115,17 @@ export class BarChart {
     #getMaxValue() {
       let max = 0
       this.chartData.forEach(element => {
-        if (element.amount > max) {
-          max = element.amount
+        if (element.value > max) {
+          max = element.value
         }
       })
       return max
   }
         
-
-
-  
     generateBar(data, indexOfBar) {
 
       const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect")
-      const barHeight = data.amount / this.#getMaxValue() * this.barsTotalHeight
+      const barHeight = data.value / this.#getMaxValue() * this.barsTotalHeight
 
       bar.setAttribute("y", `${this.chartOptions.size.height - barHeight - this.barChartOptions.marginBottom}`)
       bar.setAttribute("x", `${this.barChartOptions.barSpace + (this.barWidth + this.barChartOptions.barSpace) * indexOfBar + this.barChartOptions.marginLeft}`)

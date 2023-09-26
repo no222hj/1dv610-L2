@@ -50,7 +50,7 @@ export class LineChart {
       let path = ""
       this.chartData.forEach((element, i) => {
         currentX = xGap * i + this.lineChartOptions.marginLeft
-        currentY = this.lineTotalHeight + this.lineChartOptions.marginTop - (element.amount / this.lineChartOptions.maxValueY * this.lineTotalHeight)
+        currentY = this.lineTotalHeight + this.lineChartOptions.marginTop - (element.value / this.lineChartOptions.maxValue * this.lineTotalHeight)
         if (i === 0) {
             path = `M${currentX} ${currentY}`
         } else {
@@ -61,7 +61,6 @@ export class LineChart {
 
       })
       chartGroup.appendChild(line)
-      this.#getMaxValue()
       return chartGroup
     }
 
@@ -74,8 +73,7 @@ export class LineChart {
 
     #setLineChartOptions(userOptions) {
       const defaultOptions = {
-        maxValueX: this.#getMaxValue(),
-        maxValueY: this.#getMaxValue(),
+        maxValue: this.#getMaxValue(),
         ticks: 5,
         barSpace: 0.01 * this.chartOptions.size.width,
         marginLeft: 0.02 * this.chartOptions.size.width,
@@ -154,8 +152,8 @@ export class LineChart {
     #getMaxValue() {
         let max = 0
         this.chartData.forEach(element => {
-          if (element.amount > max) {
-            max = element.amount
+          if (element.value > max) {
+            max = element.value
           }
         })
         return max
