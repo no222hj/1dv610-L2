@@ -29,7 +29,7 @@ export class DoughnutChart {
       for (let index = 0; index < data.length; index++) {
         const doughnutPart = this.#generatePart(data[index], currentAngleInRadians)
         const title = document.createElementNS("http://www.w3.org/2000/svg", "title")
-        title.textContent = `${data[index].desc}: ${data[index].amount}`
+        title.textContent = `${data[index].argument}: ${data[index].value} (${parseFloat((data[index].percent * 100).toFixed(2))}%)`
         doughnutPart.appendChild(title)
         currentAngleInRadians += this.#convertToRadians(data[index].percent * 360)
         doughnutGroup.appendChild(doughnutPart)

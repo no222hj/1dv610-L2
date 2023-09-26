@@ -33,7 +33,7 @@ export class PieChart {
       const pieSlice = this.#generateSlice(data[index], currentAngleInRadians)
       pieSlice.setAttribute("stroke", "white")
       const title = document.createElementNS("http://www.w3.org/2000/svg", "title")
-      title.textContent = `${data[index].desc}: ${data[index].amount} \n ${data[index].percent * 100}%`
+      title.textContent = `${data[index].argument}: ${data[index].value} \n ${parseFloat((data[index].percent * 100).toFixed(2))}%`
       pieSlice.appendChild(title)
       currentAngleInRadians += this.#convertToRadians(data[index].percent * 360)
       const effects = new Effects()
