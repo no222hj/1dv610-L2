@@ -281,7 +281,7 @@ simpleCharts instantiated, no errors thrown.
 ```
 typeof dataSet
 ```
-return 'object'
+returns 'object'
 
 ***
 
@@ -419,3 +419,95 @@ Error: "simpleCharts option error: size has to be an object with width and heigh
 ```
 
 ## 1.4 Instantiation of simpleCharts with proper size options
+
+### 1.4.1 Instatiation with no size options
+Instantiation with no size options should set size width and height to dafault values 400.
+
+input: 
+
+```
+const dataSet = [
+  {argument: 'One', value: 2, color: '#219C90'},
+  {argument: 'Two', value: 2, color: '#EFC958'}
+]
+
+const simpleCharts = new SimpleCharts(dataSet)
+```
+
+output: 
+
+```
+{
+    "size": {
+        "width": 400,
+        "height": 400
+    }
+}
+```
+
+### 1.4.2 Instatiation with size options object containing width and height as positive numbers
+
+Instantiation with size options object containing width and height as positive numbers should set size width and height to corresponding values.
+
+input: 
+
+```
+const dataSet = [
+  {argument: 'One', value: 2, color: '#219C90'},
+  {argument: 'Two', value: 2, color: '#EFC958'}
+]
+
+const chartOptions = {
+  size: {
+    width: 500,
+    height: 600
+  }
+}
+
+const simpleCharts = new SimpleCharts(dataSet, chartOptions)
+```
+
+output: 
+
+```
+{
+    "size": {
+        "width": 500,
+        "height": 600
+    }
+}
+```
+
+***
+
+# 2 Plotting of pie chart
+
+## 2.1 Plotting of pie chart with varying dataset
+
+### 2.1.1 Plotting of pie chart with dataset containing two datapoints, each with value 1
+
+Plotting of pie chart with dataset containing two datapoints, each with value 1 should return an svg with two pie slices, each with value 1 and color corresponding to the color of the datapoint in the dataset. The slices should be plotted in dataset order starting from 90 degrees. Each slice should take up its corresponding percent of the pie.
+
+input: 
+
+```
+const dataSet = [
+  {argument: 'One', value: 1, color: '#219C90'},
+  {argument: 'Two', value: 1, color: '#EFC958'}
+]
+
+const simpleCharts = new SimpleCharts(dataSet)
+const pieChart = simpleCharts.pieChart()
+```
+```
+
+output: 
+
+```
+<svg width="500" height="600"><g><path d="M250,300 L249.99999999999997,75 A225,225, 0 0,1 250.00000000000006,525 Z" fill="#219C90" stroke="white"><title>One: 1 
+ 50%</title></path><path d="M250,300 L250.00000000000006,525 A225,225, 0 0,1 249.99999999999991,75 Z" fill="#EFC958" stroke="white"><title>Two: 1 
+ 50%</title></path><path d="M250, 300 m-225, 0 a225,225 0 1,0 450,0 a225,225 0 1,0 -450,0" fill="none" stroke="black"></path></g></svg>
+
+```
+
+
