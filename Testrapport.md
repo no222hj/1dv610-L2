@@ -502,7 +502,31 @@ const pieChart = simpleCharts.pieChart()
 
 output: 
 
-The pie chart svg is plotted with proper slices and properties.
+The pie chart svg is returned with proper slices and properties.
 
 ![pie chart with two slices](./resources/tests/pie-chart/pie-chart-two-data.svg)
 
+### 2.1.2 Plotting of pie chart with dataset containing three datapoints, each with value 1
+
+Plotting a pie chart with dataset containing three datapoints, each with value 1 should return an svg with three pie slices, each with value 1 and color corresponding to the color of the datapoint in the dataset. The slices should be plotted in dataset order starting from 90 degrees. Each slice should take up its corresponding percent of the pie. 
+
+input: 
+
+```
+const dataSet = [
+  {argument: 'One', value: 1, color: '#219C90'},
+  {argument: 'Two', value: 1, color: '#EFC958'},
+  {argument: 'Three', value: 1, color: '#F26B38'}
+]
+
+const simpleCharts = new SimpleCharts(dataSet)
+const pieChart = simpleCharts.pieChart()
+```
+
+output:
+
+The pie chart svg is returned with proper slices and properties.
+
+![pie chart with three slices](./resources/tests/pie-chart/pie-chart-three-data.svg)
+
+### 2.1.3 Plotting of pie chart with dataset containing three datapoints, each with value 1
