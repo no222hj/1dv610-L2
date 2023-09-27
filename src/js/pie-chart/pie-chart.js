@@ -12,8 +12,9 @@ export class PieChart {
   constructor(data, options) {
     this.chartData = data
     this.chartOptions = options //use setter in future.
-    this.chartWidth = this.chartOptions.size.width
-    this.pieWidth = this.chartWidth * 0.75
+    this.chartWidth = (this.chartWidth < this.chartOptions.size.height ? this.chartWidth : this.chartOptions.size.height)
+    this.pieWidth =  this.chartWidth * 0.75
+    console.log(this.pieWidth)
     this.radian = this.pieWidth / 2
   }
 
