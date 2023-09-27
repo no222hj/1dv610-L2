@@ -504,5 +504,5 @@ output:
 
 The pie chart svg is plotted with proper slices and properties.
 
-![pie chart with two slices](./resources\tests\pie-chart\pie-chart-two-data.svg)
+![pie chart with two slices](./resources/tests/pie-chart/pie-chart-two-data.svg)
 
