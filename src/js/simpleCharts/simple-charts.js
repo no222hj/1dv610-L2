@@ -21,29 +21,43 @@ export class SimpleCharts {
 
   constructor(chartData, userOptions) {
     this.#setChartData(chartData)
-    this.#setOptions(userOptions)
+    this.setOptions(userOptions)
   }
 
-  #setChartData(chartData) {
+  #setChartData(chartData) {      
+
+    if (chartData === undefined) {
+      throw new Error("SimpleCharts: no dataset")
+    }
+    if (!Array.isArray(chartData) || chartData.length === 0) {
+        throw new Error("SimpleCharts: dataset formatting error")
+    }
+    if (Object.keys(chartData).length < 2) {
+      throw new Error("SimpleCharts: dataset requires at least two datapoints")
+    }
+
     chartData.forEach(element => {
-      // i want to make sure that the value is a positive number and not anything else
       if (!/^(?!0$)\d+(\.\d+)?$/.test(element.value)) {
-        throw new Error("value has to be a positive number")
+        throw new Error("SimpleCharts: datapoint value required and has to be a positive number")
       }
       if (typeof element.argument !== "string") {
-        throw new Error("Description has to be a string")
+        throw new Error("SimpleCharts: datapoint argument required and has to be a string")
       }
       if (!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(element.color)) {
-        throw new Error("Color has to be a hex color")
+        throw new Error("SimpleCharts: datapoint color required and has to be a string in hex color format")
       }
     })
     this.chartData = chartData
   }
 
-  #setOptions(userOptions) {
+  setOptions(userOptions) {
 
-    if (!(userOptions.size === undefined || (typeof userOptions.size === "object" && (/^[1-9][0-9]*$/.test(userOptions.size.width) && /^[1-9][0-9]*$/.test(userOptions.size.height))))) {
-      throw new Error("Option error: size has to be an object with width and height as positive numbers")
+    if (!(userOptions.size === undefined || 
+      (typeof userOptions.size === "object" && 
+        (/^[1-9][0-9]*$/.test(userOptions.size.width) && 
+        /^[1-9][0-9]*$/.test(userOptions.size.height)) && 
+          (typeof userOptions.size.width === 'number' && typeof userOptions.size.height === 'number')))) {
+      throw new Error("simpleCharts option error: size has to be an object with width and height as positive numbers")
     }
       
     const defaultOptions = {
@@ -53,7 +67,12 @@ export class SimpleCharts {
       }
     }
 
-    this.chartOptions = Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions)))
+    if (this.chartOptions === undefined) {
+      this.chartOptions = Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions)))
+    } else { 
+      this.chartOptions = Object.assign(this.chartOptions, JSON.parse(JSON.stringify(userOptions)))
+    }
+    console.log(this.chartOptions)
   }
 
     /**
