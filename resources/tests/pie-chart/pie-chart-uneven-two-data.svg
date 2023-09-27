@@ -1,0 +1,3 @@
+<svg width="400" height="400"><g><path d="M200,200 L199.99999999999997,50 A150,150, 0 0,1 329.90381056766586,274.9999999999999 Z" fill="#219C90" stroke="white"><title>One: 1 
+ 33.33%</title></path><path d="M200,200 L329.90381056766586,274.9999999999999 A150,150, 0 1,1 199.99999999999966,50 Z" fill="#EFC958" stroke="white"><title>Two: 2 
+ 66.67%</title></path><path d="M200, 200 m-150, 0 a150,150 0 1,0 300,0 a150,150 0 1,0 -300,0" fill="none" stroke="black"></path></g></svg>
