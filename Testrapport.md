@@ -499,15 +499,10 @@ const dataSet = [
 const simpleCharts = new SimpleCharts(dataSet)
 const pieChart = simpleCharts.pieChart()
 ```
-```
 
 output: 
 
-```
-<svg width="500" height="600"><g><path d="M250,300 L249.99999999999997,75 A225,225, 0 0,1 250.00000000000006,525 Z" fill="#219C90" stroke="white"><title>One: 1 
- 50%</title></path><path d="M250,300 L250.00000000000006,525 A225,225, 0 0,1 249.99999999999991,75 Z" fill="#EFC958" stroke="white"><title>Two: 1 
- 50%</title></path><path d="M250, 300 m-225, 0 a225,225 0 1,0 450,0 a225,225 0 1,0 -450,0" fill="none" stroke="black"></path></g></svg>
+The pie chart svg is plotted with proper slices and properties.
 
-```
-
+![pie chart with two slices](resources\tests\pie-chart\pie-chart-two-data.svg)
 
