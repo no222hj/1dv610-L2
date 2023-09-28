@@ -74,7 +74,7 @@ const dataset = [
   {argument: 'Three', value: 1, color: '#A52A2A'}
 ]
 
-const cartOptions = {
+const chartOptions = {
   size: {
     width: 400,
     height: 400
@@ -107,7 +107,7 @@ const dataset = [
   {argument: 'Three', value: 1, color: '#A52A2A'}
 ]
 
-const cartOptions = {
+const chartOptions = {
   yAxis: {
     ticks: 5,
     maxValue: 10
@@ -130,13 +130,33 @@ const simpleCharts = new SimpleCharts(dataset, chartOptions)
 || **Default value:** [] |
 || **Maximum length:** 50 |
 
+Example:
+  
+```
+const dataset = [
+  {argument: 'One', value: 2, color: '#32CD32'},
+  {argument: 'Two', value: 4, color: '#A9A9A9'},
+  {argument: 'Three', value: 1, color: '#A52A2A'}
+]
+
+const chartOptions = {
+  xAxis: {
+    tickValues: ['One', 'Two', 'Three']
+  }
+}
+
+const simpleCharts = new SimpleCharts(dataset, chartOptions)
+```
+
 # Usage
 
 The different kinds of charts are generated using a corresponding method of SimpleCharts, which return the genereated svg-element.
 
 ## Pie chart
 
-A pie chart is genereated and returned by plotPieChart()
+**A pie chart is genereated and returned by plotPieChart()**
+
+Example:
 ```
 const dataSet = [
   {argument: 'One', value: 1, color: '#219C90'},
@@ -147,13 +167,15 @@ const dataSet = [
 const simpleCharts = new SimpleCharts(dataSet)
 const barChart = simpleCharts.barChart()
 ```
-Each slice of the pie display on hover the corresponding datapoints argument, value and percent of the total dataset value.
+**Each slice of the pie display on hover the corresponding datapoints argument, value and percent of the total dataset value rounded to two decimals.**
 
 ![bar chart with three bars](./resources/tests/bar-chart/bar-chart-uneven-three-data.svg)
 
 ## Bar chart
 
-A bar chart is genereated and returned by plotBarChart()
+**A bar chart is genereated and returned by plotBarChart()**
+
+Example:
 ```
 const dataSet = [
   {argument: 'One', value: 1, color: '#219C90'},
@@ -165,11 +187,15 @@ const simpleCharts = new SimpleCharts(dataSet)
 const barChart = simpleCharts.barChart()
 ```
 
+**Each bar display on hover the corresponding datapoints argument and value.**
+
 ![bar chart with three bars](./resources/tests/bar-chart/bar-chart-uneven-three-data.svg)
 
 ## Doughnut chart
 
-A doughnut chart is genereated and returned by plotDoughnutChart()
+**A doughnut chart is genereated and returned by plotDoughnutChart()**
+
+Example:
 ```
 
 const dataSet = [
@@ -183,11 +209,15 @@ const simpleCharts = new SimpleCharts(dataSet)
 const doughnutChart = simpleCharts.doughnutChart()
 ```
 
+**Each slice of the doughnut display on hover the corresponding datapoints argument, value and percent of the total dataset value rounded to two decimals.**
+
 ![doughnut chart with three datapoints](./resources/tests/doughnut-chart/doughnut-chart-three-data.svg)
 
 ## Line chart
 
-A line chart is genereated and returned by plotLineChart()
+**A line chart is genereated and returned by plotLineChart()**
+
+Example:
 ```
 
 const dataSet = [
@@ -203,7 +233,47 @@ const lineChart = simpleCharts.lineChart()
 
 ![line chart with three datapoints](./resources/tests/line-chart/line-chart-three-data.svg)
 
+## Edit options
 
+It is possible to edit the options of the chart after it has been generated. This is done by calling the method editOptions() on the chart object. The method takes an object as argument, with the same structure as the options object passed to the constructor. Only pass the options you want to change. 
+
+
+Example:
+```
+const dataSet = [
+  {argument: 'One', value: 2, color: '#219C90'},
+  {argument: 'Two', value: 3, color: '#EFC958'}
+]
+
+
+
+const simpleCharts = new SimpleCharts(dataSet)
+
+lineChart.editOptions({
+  size: {
+    width: 500,
+    height: 600
+  }
+}
+)
+
+const lineChart = simpleCharts.lineChart()
+```
+
+![line chart with two datapoints](./resources/tests/line-chart/line-chart-two-data-custom-size-different-width-height.svg)
+
+# Exceptions
+
+SimpleCharts throws exceptions in several cases. The exceptions are thrown as Error objects with a message describing the error.
+
+**Make sure to catch and handle the exceptions.**
+
+
+# Additional information
+
+Due to the fact that the charts are made up of individual svg elements, it is possible to target them separately for styling or such.
+
+**DISCALIMER:** Gitlab does not support svg in markdown, so the images are not displayed directly. The title element of the svg is not displayed properly either. Therefore the hover function is not displayed in the images. Try the charts in your browser to see the hover function.
 
 
 

@@ -14,6 +14,8 @@ const chartOptions = {
   }
 }
 
+
+
 try {
 const chartModuleValue = new SimpleCharts(dataSet, chartOptions)
 const pieChart = chartModuleValue.plotPieChart()
