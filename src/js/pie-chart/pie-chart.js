@@ -12,8 +12,8 @@ export class PieChart {
   constructor(data, options) {
     this.chartData = data
     this.chartOptions = options //use setter in future.
-    this.chartWidth = (this.chartWidth < this.chartOptions.size.height ? this.chartWidth : this.chartOptions.size.height)
-    this.pieWidth =  this.chartWidth * 0.75
+    this.smallestDimension = (this.chartOptions.size.width < this.chartOptions.size.height ? this.chartOptions.size.width : this.chartOptions.size.height)
+    this.pieWidth =  this.smallestDimension * 0.75
     console.log(this.pieWidth)
     this.radian = this.pieWidth / 2
   }
@@ -43,7 +43,7 @@ export class PieChart {
     }
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "path")
     // I want a outline circle, not a filled one to outline the chart slices.
-    circle.setAttribute("d", `M${this.chartOptions.size.width / 2}, ${this.chartOptions.size.height / 2} m${-this.radian}, 0 a${this.radian},${this.radian} 0 1,0 ${(this.chartWidth / 2) * 1.5},0 a${this.radian},${this.radian} 0 1,0 ${-(this.chartWidth / 2) * 1.5},0`)
+    circle.setAttribute("d", `M${this.chartOptions.size.width / 2}, ${this.chartOptions.size.height / 2} m${-this.radian}, 0 a${this.radian},${this.radian} 0 1,0 ${(this.smallestDimension / 2) * 1.5},0 a${this.radian},${this.radian} 0 1,0 ${-(this.smallestDimension / 2) * 1.5},0`)
     circle.setAttribute("fill", "none")
     circle.setAttribute("stroke", "black")
     pieGroup.appendChild(circle)

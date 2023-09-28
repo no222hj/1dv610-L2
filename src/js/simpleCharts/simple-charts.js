@@ -50,16 +50,21 @@ export class SimpleCharts {
     this.chartData = chartData
   }
 
-  setOptions(userOptions) {
+  setOptions(options) {
+    if (!options === undefined) {
 
-    if (!(userOptions.size === undefined || 
+    if (Object.keys(options).length > 4) {
+      throw new Error("simpleCharts option error: too many options")
+    }
+
+    if (!(typeof userOptions.size === undefined || 
       (typeof userOptions.size === "object" && 
         (/^[1-9][0-9]*$/.test(userOptions.size.width) && 
         /^[1-9][0-9]*$/.test(userOptions.size.height)) && 
           (typeof userOptions.size.width === 'number' && typeof userOptions.size.height === 'number')))) {
       throw new Error("simpleCharts option error: size has to be an object with width and height as positive numbers")
     }
-      
+    }
     const defaultOptions = {
       size: {
         width: 400,
@@ -67,11 +72,18 @@ export class SimpleCharts {
       }
     }
 
-    if (this.chartOptions === undefined) {
-      this.chartOptions = Object.assign(JSON.parse(JSON.stringify(defaultOptions)), JSON.parse(JSON.stringify(userOptions)))
+    if (options) {
+      Object.assign(defaultOptions, options)
+    const userOptions = JSON.parse(JSON.stringify(defaultOptions))
+
+    if (this.chartOptions) {
+      Object.assign(this.chartOptions, userOptions)
     } else { 
-      this.chartOptions = Object.assign(this.chartOptions, JSON.parse(JSON.stringify(userOptions)))
+      this.chartOptions = Object.assign(defaultOptions, userOptions)
     }
+  } else {
+    this.chartOptions = defaultOptions
+  }
     console.log(this.chartOptions)
   }
 
@@ -118,6 +130,7 @@ export class SimpleCharts {
   }
 
   plotDoughnutChart() {
+    this.#setPercentage()
     const svg = this.#createSVG()
     const doughnutChart = new DoughnutChart(this.chartData, this.chartOptions)
     svg.appendChild(doughnutChart.createDoughnutChart())
