@@ -21,7 +21,7 @@ export class SimpleCharts {
 
   constructor(chartData, userOptions) {
     this.#setChartData(chartData)
-    this.setOptions(userOptions)
+    this.#setOptions(userOptions)
   }
 
   #setChartData(chartData) {      
@@ -50,7 +50,7 @@ export class SimpleCharts {
     this.chartData = chartData
   }
 
-  setOptions(options) {
+  #setOptions(options) {
     if (!options === undefined) {
 
     if (Object.keys(options).length > 4) {
@@ -84,11 +84,11 @@ export class SimpleCharts {
   } else {
     this.chartOptions = defaultOptions
   }
-    console.log(this.chartOptions)
   }
 
     /**
      * Sets the percentage of each element in the chart data
+     * 
      */
     #setPercentage() {
       let total = 0;
