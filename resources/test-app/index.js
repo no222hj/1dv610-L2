@@ -2,19 +2,15 @@ import { SimpleCharts } from '../../src/js/simpleCharts/simple-charts.js'
 
 
 const dataSet = [
-  {argument: 'One', value: 15, color: '#219C90'},
-  {argument: 'Two', value: 6, color: '#EFC958'},
-  {argument: 'Three', value: 12, color: '#F26B38'},
+  {argument: 'One', value: 2, color: '#219C90'},
+  {argument: 'Two', value: 3, color: '#EFC958'}
 ]
 
 const chartOptions = {
-  size: {
-    width: 400,
-    height: 400
+  yAxis: {
+    maxValue: 10
   }
 }
-
-
 
 try {
 const chartModuleValue = new SimpleCharts(dataSet, chartOptions)

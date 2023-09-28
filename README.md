@@ -5,15 +5,21 @@ A tool to generate simple charts in svg, out of custom datasets.
 
 SimpleCharts generates a set of methods for creating pie-, bar-, doughnut- and linecharts in svg with custom data. The data is sent in the form of an array of objects. It is also possible to include a set of options for style. The components of the charts are made up of individual svg elements. This makes it possible to target them separately for styling or such.
 
+The chart have hover effects displaying information depending on chart type. This feature only works in the browser, not on github. Feel free to try the charts in your browser.
+
 # Get started! 
 
 1. Import SimpleCharts into your project from the path of the module:
+
+Example:
 
 ```
     import { SimpleCharts } from 'path'
 ```
 
 1. Set up your dataset (required) and configurations (optional):
+
+Example:
 
 ```
     const dataset = [
@@ -24,6 +30,8 @@ SimpleCharts generates a set of methods for creating pie-, bar-, doughnut- and l
 ```
 
 3. Create and instance of SimpleCharts:
+
+Example:
 
 ```
     const simpleCharts = new SimpleCharts(dataset)
