@@ -36,7 +36,6 @@ export class DoughnutChart {
         currentAngleInRadians += this.#convertToRadians(data[index].percent * 360)
         doughnutGroup.appendChild(doughnutPart)
       }
-      console.log(doughnutGroup)
       const circle = document.createElementNS("http://www.w3.org/2000/svg", "path")
       // I want a outline circle, not a filled one to outline the chart slices.
       circle.setAttribute("d", `M${this.chartWidth / 2}, ${this.chartHeight / 2} m${-this.radian}, 0 a${this.radian},${this.radian} 0 1,0 ${(this.smallestDimension / 2) * 1.5},0 a${this.radian},${this.radian} 0 1,0 ${-(this.smallestDimension / 2) * 1.5},0`)
@@ -58,8 +57,6 @@ export class DoughnutChart {
       const startInnerY = this.chartHeight / 2 + Math.sin(startAngleInRadians) * this.radian * this.innerRadius
       const endInnerX = this.chartWidth / 2 + Math.cos(startAngleInRadians + this.#convertToRadians(data.percent * 360)) * this.radian * this.innerRadius
       const endInnerY = this.chartHeight / 2 + Math.sin(startAngleInRadians + this.#convertToRadians(data.percent * 360)) * this.radian * this.innerRadius    
-
-       console.log(startOuterX, startInnerX)
   
       const d = `M ${startInnerX} ${startInnerY} ` + 
                 `L ${startOuterX} ${startOuterY} ` + 

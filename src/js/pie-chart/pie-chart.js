@@ -1,5 +1,3 @@
-import { Effects } from "../effects/effects.js"
-
 /**
  * Class for creating a pie chart
  * 
@@ -14,7 +12,6 @@ export class PieChart {
     this.chartOptions = options //use setter in future.
     this.smallestDimension = (this.chartOptions.size.width < this.chartOptions.size.height ? this.chartOptions.size.width : this.chartOptions.size.height)
     this.pieWidth =  this.smallestDimension * 0.75
-    console.log(this.pieWidth)
     this.radian = this.pieWidth / 2
   }
 
@@ -28,7 +25,6 @@ export class PieChart {
   createPieChart() { 
     const data = this.chartData
     let currentAngleInRadians = this.#convertToRadians(270)
-    console.log(currentAngleInRadians)
     const pieGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
     for (let index = 0; index < data.length; index++) {
       const pieSlice = this.#generateSlice(data[index], currentAngleInRadians)
@@ -37,8 +33,6 @@ export class PieChart {
       title.textContent = `${data[index].argument}: ${data[index].value} \n ${parseFloat((data[index].percent * 100).toFixed(2))}%`
       pieSlice.appendChild(title)
       currentAngleInRadians += this.#convertToRadians(data[index].percent * 360)
-      const effects = new Effects()
-      effects.addTooltip(pieSlice)
       pieGroup.appendChild(pieSlice)
     }
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "path")

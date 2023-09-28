@@ -47,6 +47,7 @@ export class SimpleCharts {
         throw new Error("SimpleCharts: datapoint color required and has to be a string in hex color format")
       }
     })
+    this.#setPercentage(chartData)
     this.chartData = chartData
   }
 
@@ -90,12 +91,12 @@ export class SimpleCharts {
      * Sets the percentage of each element in the chart data
      * 
      */
-    #setPercentage() {
+    #setPercentage(chartData) {
       let total = 0;
-      this.chartData.forEach(element => {
+      chartData.forEach(element => {
         total += element.value;
       });
-      this.chartData.forEach(element => {
+      chartData.forEach(element => {
         element.percent = (element.value / total)
       })
     }
@@ -107,8 +108,11 @@ export class SimpleCharts {
     return svg
   }
 
+  editOptions(userOptions) {
+    this.#setOptions(userOptions)
+  }
+
   plotPieChart() {
-    this.#setPercentage()
     const svg = this.#createSVG()
     const pieChart = new PieChart(this.chartData, this.chartOptions)
     svg.appendChild(pieChart.createPieChart())
@@ -130,7 +134,6 @@ export class SimpleCharts {
   }
 
   plotDoughnutChart() {
-    this.#setPercentage()
     const svg = this.#createSVG()
     const doughnutChart = new DoughnutChart(this.chartData, this.chartOptions)
     svg.appendChild(doughnutChart.createDoughnutChart())

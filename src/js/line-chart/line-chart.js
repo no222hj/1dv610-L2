@@ -20,7 +20,7 @@ export class LineChart {
   constructor(data, options) {
     this.chartData = data
     this.chartOptions = options
-    this.chartOptions = this.#setchartOptions(options)
+    this.chartOptions = this.#setChartOptions(options)
   }
 
   /**
@@ -45,7 +45,6 @@ export class LineChart {
     line.setAttribute("fill", "none")
 
     const xGap = this.lineTotalWidth / (this.chartData.length - 1)
-    console.log(xGap)
     let currentX = this.lineTotalWidth
     let currentY = this.lineTotalHeight
     let path = ""
@@ -72,8 +71,7 @@ export class LineChart {
    * @param {object} userOptions 
    * @returns {object} an object with the default options where the user options are omitted.
    */
-  #setchartOptions(userOptions) {
-    console.log(userOptions)
+  #setChartOptions(userOptions) {
     if (userOptions.yAxis) {
       if (typeof userOptions.yAxis !== 'object') {
         throw new Error("simpleCharts option error: yAxis has to be an object")
@@ -124,7 +122,6 @@ export class LineChart {
     options.marginRight = 0.02 * this.chartOptions.size.width
     options.marginTop = 0.02 * this.chartOptions.size.height
     options.marginBottom = 0.02 * this.chartOptions.size.height
-    console.log(options)
     return options
   }
 
@@ -134,7 +131,6 @@ export class LineChart {
    * @returns {object} svg element representing the axis.
    */
   #generateAxisX() {
-    console.log(this.chartOptions.xAxis.ticks)
     const margin = this.chartOptions.marginLeft
     const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
     const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
