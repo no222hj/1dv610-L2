@@ -2,19 +2,25 @@ import { SimpleCharts } from '../../src/js/simpleCharts/simple-charts.js'
 
 
 const dataSet = [
-  {argument: 'One', value: 2, color: '#219C90'},
-  {argument: 'Two', value: 3, color: '#EFC958'}
+  {argument: 'One', value: 1, color: '#219C90'},
+  {argument: 'Two', value: 2, color: '#EFC958'},
+  {argument: 'Three', value: 3, color: '#F26B38'},
+  {argument: 'Four', value: 4, color: '#6B5B95'},
+  {argument: 'Five', value: 5, color: '#D64161'}
 ]
 
-const chartOptions = {
-  yAxis: {
-    maxValue: 10
-  }
-}
+const simpleCharts = new SimpleCharts(dataSet)
 
 try {
-const chartModuleValue = new SimpleCharts(dataSet, chartOptions)
+const chartModuleValue = new SimpleCharts(dataSet)
 const pieChart = chartModuleValue.plotPieChart()
+const chartOptions = {
+  size: {
+    width: 600,
+    height: 600
+  }
+}
+chartModuleValue.editOptions(chartOptions)
 const barChart = chartModuleValue.plotBarChart()
 const lineChart = chartModuleValue.plotLineChart()
 const doughnutChart = chartModuleValue.plotDoughnutChart()

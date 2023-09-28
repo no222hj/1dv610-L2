@@ -156,7 +156,6 @@ export class BarChart {
     bar.setAttribute("height", `${barHeight}`)
     bar.setAttribute("fill", `${data.color}`)
     bar.setAttribute("stroke", "black")
-    console.log(barHeight)
     return bar
   }
 }

@@ -45,8 +45,7 @@ export class LineChart {
     line.setAttribute("fill", "none")
 
     const xGap = this.lineTotalWidth / (this.chartData.length - 1)
-    console.log(xGap)
-    console.log(this.lineTotalWidth)
+
     let currentX = this.lineTotalWidth
     let currentY = this.lineTotalHeight
     let path = ""
@@ -54,7 +53,7 @@ export class LineChart {
       currentX = xGap * i
       currentY = this.lineTotalHeight + this.chartOptions.marginTop - (element.value / this.chartOptions.yAxis.maxValue * this.lineTotalHeight)
       if (i === 0) {
-        path = `M${currentX} ${currentY}`
+        path = `M${currentX + this.chartOptions.marginLeft} ${currentY}`
       } else {
         path += ` L${currentX} ${currentY}`
       }

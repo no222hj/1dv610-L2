@@ -1,6 +1,7 @@
 # Testrapport
 
 This project were tested using manual test cases where input and output were recorded in this report.
+Date: 2023-09-27
 
 # Case 1, Instantiate SimpleCharts with datasets.
 
@@ -1955,6 +1956,86 @@ output:
 The svg and doughnut chart has the right dimensions and are centered.
 
 ![doughnut chart with two datapoints](./resources/tests/doughnut-chart/doughnut-chart-two-data-custom-size-different-width-height.svg)
+
+# 6 Editing of options
+
+## 6.1 Editing of options after initialization
+
+### 6.1.1 Editing of options after initialization with valid options
+
+Editing of options after initialization with valid options should set the new options, with the old options as default values.
+
+input:
+
+```
+
+const dataSet = [
+  {argument: 'One', value: 1, color: '#219C90'},
+  {argument: 'Two', value: 2, color: '#EFC958'},
+  {argument: 'Three', value: 3, color: '#F26B38'},
+  {argument: 'Four', value: 4, color: '#6B5B95'},
+  {argument: 'Five', value: 5, color: '#D64161'}
+]
+
+const simpleCharts = new SimpleCharts(dataSet)
+
+const barChart = simpleCharts.barChart()
+
+const chartOptions = {
+  size: {
+    width: 500,
+    height: 600
+  }
+}
+
+simpleCharts.setOptions(chartOptions)
+
+const newBarChart = simpleCharts.barChart()
+```
+
+output:
+
+The new bar chart has the new options.
+
+### 6.1.2 Editing of options after initialization with invalid options
+
+Editing of options after initialization with invalid options should throw an error with corresponding message.
+
+input:
+
+```
+
+const dataSet = [
+  {argument: 'One', value: 1, color: '#219C90'},
+  {argument: 'Two', value: 2, color: '#EFC958'},
+  {argument: 'Three', value: 3, color: '#F26B38'},
+  {argument: 'Four', value: 4, color: '#6B5B95'},
+  {argument: 'Five', value: 5, color: '#D64161'}
+]
+
+const simpleCharts = new SimpleCharts(dataSet)
+
+const barChart = simpleCharts.barChart()
+
+const chartOptions = {
+  size: {
+    width: 'string',
+    height: 600
+  }
+}
+
+simpleCharts.setOptions(chartOptions)
+
+const newBarChart = simpleCharts.barChart()
+```
+
+output:
+
+Error: "simpleCharts option error: size width has to be a positive number"
+
+
+
+
 
 
 
