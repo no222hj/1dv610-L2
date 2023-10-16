@@ -173,7 +173,7 @@ const dataSet = [
 ]
 
 const simpleCharts = new SimpleCharts(dataSet)
-const barChart = simpleCharts.barChart()
+const pieChart = simpleCharts.pieChart()
 ```
 **Each slice of the pie display on hover the corresponding datapoints argument, value and percent of the total dataset value rounded to two decimals.**
 
