@@ -192,7 +192,7 @@ const dataSet = [
 ]
 
 const simpleCharts = new SimpleCharts(dataSet)
-const barChart = simpleCharts.barChart()
+const plotBarChart = simpleCharts.plotBarChart()
 ```
 
 **Each bar display on hover the corresponding datapoints argument and value.**
@@ -214,7 +214,7 @@ const dataSet = [
 
 const simpleCharts = new SimpleCharts(dataSet)
 
-const doughnutChart = simpleCharts.doughnutChart()
+const plotDoughnutChart = simpleCharts.doughnutChart()
 ```
 
 **Each slice of the doughnut display on hover the corresponding datapoints argument, value and percent of the total dataset value rounded to two decimals.**
@@ -236,7 +236,7 @@ const dataSet = [
 
 const simpleCharts = new SimpleCharts(dataSet)
 
-const lineChart = simpleCharts.lineChart()
+const lineChart = simpleCharts.plotLineChart()
 ```
 
 ![line chart with three datapoints](./resources/tests/line-chart/line-chart-three-data.svg)
