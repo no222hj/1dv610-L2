@@ -29,7 +29,7 @@ export class SimpleCharts {
     if (chartData === undefined) {
       throw new Error("SimpleCharts: no dataset")
     }
-    if (!Array.isArray(chartData) || chartData.length === 0) {
+    if (!Array.isArray(chartData)) {
         throw new Error("SimpleCharts: dataset formatting error")
     }
     if (Object.keys(chartData).length < 2) {
