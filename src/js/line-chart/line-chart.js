@@ -1,13 +1,3 @@
-/**
- * Class for creating a bar chart
- * 
- * @author Nathanael Olsson
- * @verison 1.0.0
- */
-
-/**
- * Creates a bar chart svg
- */
 
 export class LineChart {
 
@@ -23,11 +13,6 @@ export class LineChart {
     this.chartOptions = this.#setChartOptions(options)
   }
 
-  /**
-   * Creates a bar chart svg
-   * 
-   * @returns {object} an svg element <g> with a bar chart.
-   */
 
   createLineChart() {
 
@@ -66,12 +51,6 @@ export class LineChart {
     return chartGroup
   }
 
-  /**
-   * Sets the default options for the bar chart.
-   * 
-   * @param {object} userOptions 
-   * @returns {object} an object with the default options where the user options are omitted.
-   */
   #setChartOptions(userOptions) {
     if (userOptions.yAxis) {
       if (typeof userOptions.yAxis !== 'object') {
@@ -126,11 +105,6 @@ export class LineChart {
     return options
   }
 
-  /**
-   * Generates a x-axis for the bar chart.
-   * 
-   * @returns {object} svg element representing the axis.
-   */
   #generateAxisX() {
     const margin = this.chartOptions.marginLeft
     const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
@@ -162,11 +136,6 @@ export class LineChart {
     return axis
   }
 
-  /**
-   * Generates a y-axis for the bar chart.
-   * 
-   * @returns {object} svg element representing the axis.
-   */
   #generateAxisY() {
     const margin = this.chartOptions.marginLeft
     const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
@@ -195,12 +164,6 @@ export class LineChart {
     return axis
   }
 
-  /**
-   * Gets the maximum value of the data.
-   * 
-   * @returns {number} the maximum value of the data.
-   * 
-   */
   #getMaxValue() {
     let max = 0
     this.chartData.forEach(element => {

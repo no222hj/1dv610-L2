@@ -1,9 +1,3 @@
-/**
- * Class for creating a pie chart
- * 
- * @author Nathanael Olsson
- * @verison 1.0.0
- */
 
 export class PieChart {
 
@@ -15,13 +9,6 @@ export class PieChart {
     this.radian = this.pieWidth / 2
   }
 
-  /**
-   * Creates a pie chart
-   * 
-   * @returns {object} pieGroup
-   * 
-   * @memberof PieChart
-   */
   createPieChart() { 
     const data = this.chartData
     let currentAngleInRadians = this.#convertToRadians(270)
@@ -36,7 +23,6 @@ export class PieChart {
       pieGroup.appendChild(pieSlice)
     }
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "path")
-    // I want a outline circle, not a filled one to outline the chart slices.
     circle.setAttribute("d", `M${this.chartOptions.size.width / 2}, ${this.chartOptions.size.height / 2} m${-this.radian}, 0 a${this.radian},${this.radian} 0 1,0 ${(this.smallestDimension / 2) * 1.5},0 a${this.radian},${this.radian} 0 1,0 ${-(this.smallestDimension / 2) * 1.5},0`)
     circle.setAttribute("fill", "none")
     circle.setAttribute("stroke", "black")
@@ -44,17 +30,6 @@ export class PieChart {
     return pieGroup
   }
 
-
-  /**
-   * Generates a pie slice
-   * 
-   * @param {object} data - The data for the pie slice.
-   * @param {number} startAngleInRadians - The start angle of the pie slice in radians.
-   * @returns {object} pieSlice
-   * 
-   * @memberof PieChart
-   * @private
-   */
   #generateSlice(data, startAngleInRadians) {
     const pieSlice = document.createElementNS("http://www.w3.org/2000/svg", "path")
     const startX = this.chartOptions.size.width / 2 + Math.cos(startAngleInRadians) * this.radian

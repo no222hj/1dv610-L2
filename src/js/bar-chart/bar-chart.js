@@ -1,13 +1,3 @@
-/**
- * Class for creating a bar chart
- * 
- * @author Nathanael Olsson
- * @verison 1.0.0
- */
-
-/**
- * Creates a bar chart svg
- */
 
 export class BarChart {
 
@@ -99,11 +89,6 @@ export class BarChart {
     return axis
   }
 
-    /**
-     * Generates a y-axis for the bar chart.
-     * 
-     * @returns {object} svg element representing the axis.
-     */
     #generateAxisY() {
       const margin = this.chartOptions.marginLeft
       const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
@@ -132,9 +117,6 @@ export class BarChart {
       return axis
     }
 
-
-  // function for deciding x axis top value, if no argument is given, the function will use the highest value in the chart data
-  //Redo this later with options
   #getMaxValue() {
     let max = 0
     this.chartData.forEach(element => {

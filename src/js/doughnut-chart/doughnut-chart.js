@@ -1,20 +1,10 @@
-/**
- * Class for creating a pie chart
- * 
- * @author Nathanael Olsson
- * @verison 1.0.0
- */
-
-/**
- * Creates a pie chart svg
- */
 
 export class DoughnutChart {
 
 
     constructor(data, options) {
       this.chartData = data
-      this.chartOptions = options //use setter in future.
+      this.chartOptions = options
       this.smallestDimension = (this.chartOptions.size.width < this.chartOptions.size.height ? this.chartOptions.size.width : this.chartOptions.size.height)
       this.chartHeight = this.chartOptions.size.height
       this.chartWidth = this.chartOptions.size.width
@@ -37,7 +27,6 @@ export class DoughnutChart {
         doughnutGroup.appendChild(doughnutPart)
       }
       const circle = document.createElementNS("http://www.w3.org/2000/svg", "path")
-      // I want a outline circle, not a filled one to outline the chart slices.
       circle.setAttribute("d", `M${this.chartWidth / 2}, ${this.chartHeight / 2} m${-this.radian}, 0 a${this.radian},${this.radian} 0 1,0 ${(this.smallestDimension / 2) * 1.5},0 a${this.radian},${this.radian} 0 1,0 ${-(this.smallestDimension / 2) * 1.5},0`)
       circle.setAttribute("fill", "none")
       circle.setAttribute("stroke", "black")

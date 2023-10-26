@@ -10,9 +10,6 @@ import { BarChart } from '../bar-chart/bar-chart.js'
 import { LineChart } from '../line-chart/line-chart.js'
 import { DoughnutChart } from '../doughnut-chart/doughnut-chart.js'
 
-/**
- * Creates a chart module
- */
 export class SimpleCharts {
 
   chartData
@@ -87,10 +84,6 @@ export class SimpleCharts {
   }
   }
 
-    /**
-     * Sets the percentage of each element in the chart data
-     * 
-     */
     #setPercentage(chartData) {
       let total = 0;
       chartData.forEach(element => {
@@ -100,13 +93,6 @@ export class SimpleCharts {
         element.percent = (element.value / total)
       })
     }
-
-  #createSVG() {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-    svg.setAttribute("width", `${this.chartOptions.size.width}`)
-    svg.setAttribute("height", `${this.chartOptions.size.height}`)
-    return svg
-  }
 
   editOptions(userOptions) {
     this.#setOptions(userOptions)
@@ -137,6 +123,13 @@ export class SimpleCharts {
     const svg = this.#createSVG()
     const doughnutChart = new DoughnutChart(this.chartData, this.chartOptions)
     svg.appendChild(doughnutChart.createDoughnutChart())
+    return svg
+  }
+
+  #createSVG() {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    svg.setAttribute("width", `${this.chartOptions.size.width}`)
+    svg.setAttribute("height", `${this.chartOptions.size.height}`)
     return svg
   }
 }

@@ -20,9 +20,9 @@ const chartOptions = {
     height: 600
   }
 }
-chartModuleValue.editOptions(chartOptions)
 const barChart = chartModuleValue.plotBarChart()
 const lineChart = chartModuleValue.plotLineChart()
+chartModuleValue.editOptions(chartOptions)
 const doughnutChart = chartModuleValue.plotDoughnutChart()
 document.getElementById('pieChart').appendChild(pieChart)
 document.getElementById('barChart').appendChild(barChart)
