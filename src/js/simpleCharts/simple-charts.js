@@ -1,10 +1,3 @@
-/**
- * Chart module class
- * 
- * @author Nathanael Olsson
- * @version 1.0.0
- */
-
 import { PieChart } from '../pie-chart/pie-chart.js'
 import { BarChart } from '../bar-chart/bar-chart.js'
 import { LineChart } from '../line-chart/line-chart.js'
@@ -21,13 +14,13 @@ export class SimpleCharts {
     this.#setOptions(userOptions)
   }
 
-  #setChartData(chartData) {      
+  #setChartData(chartData) {
 
     if (chartData === undefined) {
       throw new Error("SimpleCharts: no dataset")
     }
     if (!Array.isArray(chartData)) {
-        throw new Error("SimpleCharts: dataset formatting error")
+      throw new Error("SimpleCharts: dataset formatting error")
     }
     if (Object.keys(chartData).length < 2) {
       throw new Error("SimpleCharts: dataset requires at least two datapoints")
@@ -51,17 +44,17 @@ export class SimpleCharts {
   #setOptions(options) {
     if (!options === undefined) {
 
-    if (Object.keys(options).length > 4) {
-      throw new Error("simpleCharts option error: too many options")
-    }
+      if (Object.keys(options).length > 4) {
+        throw new Error("simpleCharts option error: too many options")
+      }
 
-    if (!(typeof userOptions.size === undefined || 
-      (typeof userOptions.size === "object" && 
-        (/^[1-9][0-9]*$/.test(userOptions.size.width) && 
-        /^[1-9][0-9]*$/.test(userOptions.size.height)) && 
+      if (!(typeof userOptions.size === undefined ||
+        (typeof userOptions.size === "object" &&
+          (/^[1-9][0-9]*$/.test(userOptions.size.width) &&
+            /^[1-9][0-9]*$/.test(userOptions.size.height)) &&
           (typeof userOptions.size.width === 'number' && typeof userOptions.size.height === 'number')))) {
-      throw new Error("simpleCharts option error: size has to be an object with width and height as positive numbers")
-    }
+        throw new Error("simpleCharts option error: size has to be an object with width and height as positive numbers")
+      }
     }
     const defaultOptions = {
       size: {
@@ -72,27 +65,27 @@ export class SimpleCharts {
 
     if (options) {
       Object.assign(defaultOptions, options)
-    const userOptions = JSON.parse(JSON.stringify(defaultOptions))
+      const userOptions = JSON.parse(JSON.stringify(defaultOptions))
 
-    if (this.chartOptions) {
-      Object.assign(this.chartOptions, userOptions)
-    } else { 
-      this.chartOptions = Object.assign(defaultOptions, userOptions)
+      if (this.chartOptions) {
+        Object.assign(this.chartOptions, userOptions)
+      } else {
+        this.chartOptions = Object.assign(defaultOptions, userOptions)
+      }
+    } else {
+      this.chartOptions = defaultOptions
     }
-  } else {
-    this.chartOptions = defaultOptions
-  }
   }
 
-    #setPercentage(chartData) {
-      let total = 0;
-      chartData.forEach(element => {
-        total += element.value;
-      });
-      chartData.forEach(element => {
-        element.percent = (element.value / total)
-      })
-    }
+  #setPercentage(chartData) {
+    let total = 0;
+    chartData.forEach(element => {
+      total += element.value;
+    });
+    chartData.forEach(element => {
+      element.percent = (element.value / total)
+    })
+  }
 
   editOptions(userOptions) {
     this.#setOptions(userOptions)

@@ -38,18 +38,18 @@ export class BarChart {
   #setChartOptions(userOptions) {
 
     if (userOptions.yAxis) {
-          if (typeof userOptions.yAxis !== 'object') {
-      throw new Error("simpleCharts option error: yAxis has to be an object")
-    }
+      if (typeof userOptions.yAxis !== 'object') {
+        throw new Error("simpleCharts option error: yAxis has to be an object")
+      }
 
-    if ((userOptions.yAxis.ticks) && (!(/^[1-9][0-9]*$/.test(userOptions.yAxis.ticks) && (typeof userOptions.yAxis?.ticks === 'number')))) {
-      throw new Error("simpleCharts option error: yAxis ticks has to be a positive number")
-    }
+      if ((userOptions.yAxis.ticks) && (!(/^[1-9][0-9]*$/.test(userOptions.yAxis.ticks) && (typeof userOptions.yAxis?.ticks === 'number')))) {
+        throw new Error("simpleCharts option error: yAxis ticks has to be a positive number")
+      }
 
-    if ((userOptions.yAxis.maxValue) && ((!(/^[1-9][0-9]*$/.test(userOptions.yAxis.maxValue) && (typeof userOptions.yAxis?.maxValue === 'number'))) || (userOptions.yAxis.maxValue < this.#getMaxValue()))) {
-      throw new Error("simpleCharts option error: yAxis maxValue has to be a positive number larger than hightest value in chart data")
+      if ((userOptions.yAxis.maxValue) && ((!(/^[1-9][0-9]*$/.test(userOptions.yAxis.maxValue) && (typeof userOptions.yAxis?.maxValue === 'number'))) || (userOptions.yAxis.maxValue < this.#getMaxValue()))) {
+        throw new Error("simpleCharts option error: yAxis maxValue has to be a positive number larger than hightest value in chart data")
+      }
     }
-  }
     const options = JSON.parse(JSON.stringify(userOptions))
     const yAxisOptions = {
       ticks: 5,
@@ -89,33 +89,33 @@ export class BarChart {
     return axis
   }
 
-    #generateAxisY() {
-      const margin = this.chartOptions.marginLeft
-      const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
-      const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
-      axisLine.setAttribute("x1", 0 + margin)
-      axisLine.setAttribute("y1", 0 + this.chartOptions.marginTop)
-      axisLine.setAttribute("x2", 0 + margin)
-      axisLine.setAttribute("y2", this.chartOptions.size.height - this.chartOptions.marginBottom)
-      axisLine.setAttribute("stroke", "black")
-      axis.appendChild(axisLine)
+  #generateAxisY() {
+    const margin = this.chartOptions.marginLeft
+    const axis = document.createElementNS("http://www.w3.org/2000/svg", "g")
+    const axisLine = document.createElementNS("http://www.w3.org/2000/svg", "line")
+    axisLine.setAttribute("x1", 0 + margin)
+    axisLine.setAttribute("y1", 0 + this.chartOptions.marginTop)
+    axisLine.setAttribute("x2", 0 + margin)
+    axisLine.setAttribute("y2", this.chartOptions.size.height - this.chartOptions.marginBottom)
+    axisLine.setAttribute("stroke", "black")
+    axis.appendChild(axisLine)
 
-      const tickSpace = (this.chartOptions.size.height - (this.chartOptions.marginBottom + this.chartOptions.marginTop)) / this.chartOptions.yAxis.ticks
-      for (let i = 0; i < this.chartOptions.yAxis.ticks; i++) {
-        const tick = document.createElementNS("http://www.w3.org/2000/svg", "line")
-        tick.setAttribute("x1", 0)
-        tick.setAttribute("y1", tickSpace * i + this.chartOptions.marginTop)
-        tick.setAttribute("x2", 0 + margin)
-        tick.setAttribute("y2", tickSpace * i + this.chartOptions.marginTop)
-        tick.setAttribute("stroke", "black")
-        tick.setAttribute("stroke-width", "2")
-        const title = document.createElementNS("http://www.w3.org/2000/svg", "title")
-        title.textContent = `${parseFloat((this.chartOptions.yAxis.maxValue / this.chartOptions.yAxis.ticks * (this.chartOptions.yAxis.ticks - i)).toFixed(2))}`
-        tick.appendChild(title)
-        axis.appendChild(tick)        
-        }
-      return axis
+    const tickSpace = (this.chartOptions.size.height - (this.chartOptions.marginBottom + this.chartOptions.marginTop)) / this.chartOptions.yAxis.ticks
+    for (let i = 0; i < this.chartOptions.yAxis.ticks; i++) {
+      const tick = document.createElementNS("http://www.w3.org/2000/svg", "line")
+      tick.setAttribute("x1", 0)
+      tick.setAttribute("y1", tickSpace * i + this.chartOptions.marginTop)
+      tick.setAttribute("x2", 0 + margin)
+      tick.setAttribute("y2", tickSpace * i + this.chartOptions.marginTop)
+      tick.setAttribute("stroke", "black")
+      tick.setAttribute("stroke-width", "2")
+      const title = document.createElementNS("http://www.w3.org/2000/svg", "title")
+      title.textContent = `${parseFloat((this.chartOptions.yAxis.maxValue / this.chartOptions.yAxis.ticks * (this.chartOptions.yAxis.ticks - i)).toFixed(2))}`
+      tick.appendChild(title)
+      axis.appendChild(tick)
     }
+    return axis
+  }
 
   #getMaxValue() {
     let max = 0

@@ -5,11 +5,11 @@ export class PieChart {
     this.chartData = data
     this.chartOptions = options //use setter in future.
     this.smallestDimension = (this.chartOptions.size.width < this.chartOptions.size.height ? this.chartOptions.size.width : this.chartOptions.size.height)
-    this.pieWidth =  this.smallestDimension * 0.75
+    this.pieWidth = this.smallestDimension * 0.75
     this.radian = this.pieWidth / 2
   }
 
-  createPieChart() { 
+  createPieChart() {
     const data = this.chartData
     let currentAngleInRadians = this.#convertToRadians(270)
     const pieGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
